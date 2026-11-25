@@ -4,8 +4,8 @@
     <application
     android:theme="@style/AppTheme"
     android:label="CBook"
-    android:icon="@res/cbook_logo"
-    android:roundIcon="@res/cbook_logo"
+    android:icon="@drawable/cbook_logo.png"
+    android:roundIcon="@drawable/cbook_logo.png"
     android:allowBackup="true"
     android:supportsRtl="true">
         
