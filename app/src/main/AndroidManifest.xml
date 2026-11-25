@@ -2,12 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:theme="@style/AppTheme"
-        android:label="CBook"
-        android:allowBackup="true"
-        android:supportsRtl="true">
-
-        <activity
+    android:theme="@style/AppTheme"
+    android:label="CBook"
+    android:icon="@drawable/cbook_logo"
+    android:roundIcon="@drawable/cbook_logo"
+    android:allowBackup="true"
+    android:supportsRtl="true">
+        
+     <activity
             android:name=".MainActivity"
             android:exported="true">
 
