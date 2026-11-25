@@ -1,0 +1,48 @@
+name: Build CBook APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK
+        run: |
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Download Gradle
+        run: |
+          curl -L -o gradle.zip https://services.gradle.org/distributions/gradle-8.2-bin.zip
+          unzip -q gradle.zip
+          export GRADLE_HOME="$PWD/gradle-8.2"
+          export PATH="$GRADLE_HOME/bin:$PATH"
+          gradle --version
+
+      - name: Build APK
+        run: |
+          export GRADLE_HOME="$PWD/gradle-8.2"
+          export PATH="$GRADLE_HOME/bin:$PATH"
+          gradle assembleDebug --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: CBook-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
